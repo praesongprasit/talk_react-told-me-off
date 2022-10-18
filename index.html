@@ -44,7 +44,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 		<link rel="stylesheet" href="dist/theme/personal-branding.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
-		<!-- <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme"> -->
+		<link rel="stylesheet" href="plugin/highlight/zenburn.css" id="highlight-theme">
 	</head>
 	<body>
 		<div class="reveal">
@@ -129,83 +129,144 @@ Let me show you a few ways React and React Testing Library told me off!" />
 				</section>
 
 				<section>
+					<h2>React <br>Testing Library</h2>
+					<p>Enforce user centric tests</p>
+
+					<aside class="notes">
+						<p>This testing library can be added to many front-end frameworks.</p>
+						<p>But since I'm working with React, I only know how to use it with React at the moment.</p>
+						<p>The Testing Library helps me test UI components in a user-centric way, like the way a user would use a component.</p>
+					</aside>
+				</section>
+
+				<section>
 					<pre>
 						<code data-trim data-noescape>
-							import React from 'react';
-							import { Button } from '@a-ui-library;
+							&lt;Button
+								label="Add a new fish"
+								onClick="showInput(fishClass)"
+							/&gt;
+							
+							&lt;Input
+								aria-label="Fish name"
+								class="fishClass"
+							/&gt;
+							<span class="fragment">
+							showInput(fishClass)
 
-							function App() {
-								return &lt;Button color="primary"&gt;Shop now&lt;/Button&gt;;
-							}
+							expect(&lt;Input class="fishClass"/&gt;) 🤯
+							</span>
 						</code>
 					</pre>
-					
-					<p span class="fragment" data-fragment-index="1">
-						<strong>Did you just disable someone?</strong></br>
-						Check your HTML output
-					</p>
 
 					<aside class="notes">
-						<p>Think about what you coded recently. </p>
-						<p>Most of us are living in JS => HTML world. Coding mostly in JS, and outputting HTML. </p>
-						<p>Have you thought about what your plain HTML output means to users? </p>
-						<p>Taking all the styles and JS interactivity away, does your HTML have meaning?</p>
-						<p><strong>Did the HTML you output recently empower users, and enable them to do or find what they want?</strong></p>
-						<p>Alright, you might be thinking, I get it. Check my HTML. But is that all?</p>
+						<p>For example, I was tasked to write tests for a button that would show an input field.</p>
+						<p>[Read code from slide]</p>
+						<p>A note that in this example, Input field doesn't have a visible label... and used aria-label.... I've only done that to shorten the slide.</p>
+						<p>Please add a visible label and link it to input using for and ID instead!!</p>
+						<hr>
+						<p>Anyway...</p>
+						<p>In the past, the back-end style of writing tests, would focus on testing the function and implementation itself. In this case, the test would:</p>
+						<p>[Next, Read code from slide]</p>
+						<p>The problem I have with this, is that it only tests if the input field with a class name "fishClass" appears on the page when that code is executed. The test doesn't care if there's an accessible name called "Fish name" attached to that newly rendered input field.</p>
+						<p>That's not how users think about this interface.</p>
+						<p>Users don't care about a classname? CSS classes are not visible to users on the page; their screen reader won't read it, and voice dictation tools can't find an element using CSS class.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>When?</h2>
+					<pre>
+						<code data-trim data-noescape>
+							&lt;Button
+								label="Add a new fish"
+								onClick="showInput(fishClass)"
+							/&gt;
+							
+							&lt;Input
+								aria-label="Fish name"
+								class="fishClass"
+							/&gt;
+							
+							userEvent.click(screen.getByText('Add a new fish'));
+
+							expect(
+								screen.getByRole('input', { name: 'Fish name' })
+							).toBeInTheDocument(); ❤️
+						</code>
+					</pre>
 
 					<aside class="notes">
-						<p>How early should devs be involved? Depends</p>
-						<p>What kind of project? Is it a technical solution? Or is it a brochureware site?</p>
-						<p>Problem statements can be shared early</p>
-						<p>User research sessions can have devs join in</p>
-						<p>Data intensive projects can benefit from Dev wireframing. Yes UXers can do it with Axure, but devs don't have time to think about data models</p>
+						<p>To the user, a button called "Add a new fish" was clicked, and an input field with an accessible name called "Fish name" appeared.</p>
+						<p>React Testing Library is accessibility-first like that.</p>
+						<p>It encourages engineers to write tests that queries accessible names and DOM roles, rather than arbitrary IDs and Classes that users don't care about.</p>
+						<p>You can query by other useful static things like ByTitle, ByAltText, ByDisplayValue, even interactive states like pressed, checked, selected.</p>
+						<p>This is fantastic, because if the test cannot access those values, then something is seriously inaccessible about your code.</p>
+						<p>I once spotted an issue, where a hidden attribute accidentally remained attached to a component that should be displaying, because the query said it couldn't find this hidden text.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>How?</h2>
-
-					<ul>
-						<li class="fragment" data-fragment-index="1">Ask</li>
-						<li class="fragment" data-fragment-index="2">Align test session with appropriate dev</li>
-						<li class="fragment" data-fragment-index="3">Roster devs</li>
-						<li class="fragment" data-fragment-index="4">Turn them into observers and/or note taker</li>
-						<li class="fragment" data-fragment-index="5">Share findings with the team</li>
-					</ul>
+					<h2>What about React?</h2>
+					<p>Improved docs, <br>development assistance, &amp; bundling</p>
 
 					<aside class="notes">
-						<p>A lot of what I taked about means double budget (dev + design) early, which pays off</p>
-						<p>Some devs, especially BEDs, see no point in this. FEDs are often on board</p>
-						<p>When companies first try, they make devs sit in every testing session, both user and usability test. Pointless, deminishing return</p>
-						<p>Data heavy prototype, get devs to sit in first session, fix, and followup</p>
-						<p>Final synthesised findings give devs idea of how decisions are reached, important to them and not</p>
+						<p>I talked quite a bit about the React version of Testing Library.</p>
+						<p>But as the name suggests, it's a library. Something designed to be used in conjunction with a framework. It's not React itself.</p>
+						<p>So what does React itself actually do to help nudge engineers to write more accessible code?</p>
+						<hr>
+						<p>First, it tries to improve documentation.</p>
+						<p>They also understand that beginners copy and paste code quite blindly when learning. So their copy-paste examples all throughout their docs are getting better and more accessibility conscious all the time.</p>
+						<p>That is of course, human intervention. Requires reading. What about machine intervention?</p>
+						<hr>
+						<p>Second, it provide basic development assistance</p>
+						<p>Everyone makes mistakes. Whenever possible, let tools instead of people tell them off.</p>
+						<p>There are some basic accessibility linting that came with React.</p>
+						<p>It would highlight an HTML attribute that isn't right for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Why not simply share finding?</h2>
-					<p class="fragment" data-fragment-index="1">It's an investment in your developers, and the team</p>
+					<pre>
+						<code data-trim data-noescape>
+							&lt;input tabindex="0"/&gt;
+							<span class="fragment">
+							Type '{ tabindex: string; "aria-label": string; }' 
+							is not assignable to type 
+							'DetailedHTMLProps&lt;InputHTMLAttributes
+							&lt;HTMLInputElement&gt;, HTMLInputElement&gt;'.
+								
+							Property 'tabindex' does not exist on type
+							'DetailedHTMLProps&lt;InputHTMLAttributes
+							&lt;HTMLInputElement&gt;, HTMLInputElement&gt;'.
+							Did you mean 'tabIndex'?
+							</span>
+						</code>
+					</pre>
 
 					<aside class="notes">
-						<p>Only sharing findings is like telling GoT beginning, and explain the ending</p>
-						<p>A dev who see users right click, will remember to markup links correctly</p>
-						<p>Small dev decisions are made without UX knowing. Database structure, allow scroll in iOS, how iframe gets put together and etc.</p>
-						<p>A dev who have witness his/her take 10 seconds to load during a session, is more likely to be on board with performance projects</p>
-						<p>Remind eachother of the experiences we've shared</p>
+						<p>An example, would be</p>
+						<p>[Read code from slide]</p>
+						<p>The linting message said:</p>
+						<p>[Next, Read code from slide]</p>
+						<p>It's basically saying that I shouldn't be allowed to put tabindex on an input.</p>
+						<p>React also highly recommended other complimentary development plugins like eslint-plugin-jsx-a11y, which provides more accessibility linting feedback as you code in your favourite code editor. </p>
+						<p>The last thing React did, was to recommend good practices in Create React App starter guide</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>UX is a journey</h2>
-					<p class="fragment" data-fragment-index="1">
-						Best experience for developers <br>
-						=<br>
-						Best experience for users</p>
+					<p>Create React App</p>
+					<img
+							width="40%"
+							src="img/create-react-app.svg"
+							alt="Simplified UI of 4 to-do list states, empty, with an item added, done, and archived">
+
+					<aside class="notes">
+						<p>Create React App's is a bootstrap kit for starting a new React project.</p>
+						<p>React understand that it's crucial to add best practices to starter kits, because that's usually how someone starts learning how to build with React.</p>
+						<p>Who reads documentation?!</p>
+						<p>React Testing Library and the linting tools mentioned in main React docs is also mentioned in Create React App guides, along with other accessibility best practices</p>
+					</aside>
 				</section>
 
 				<section>
@@ -214,7 +275,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						Yes... but you can make it harder
 					</p>
 					<aside class="notes">
-						<p>But wait… Can't people just ignore or by-pass these tests?</p>
+						<p>But wait… this is real life. Can't people also just ignore or by-pass these tests?</p>
 						<p>Yes, and no. Depends.</p>
 						<p>For React Testing Library, if you don't write any tests as a part of your usual development process, then of course you won't reap these benefits.</p>
 					</aside>

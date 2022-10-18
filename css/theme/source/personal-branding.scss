@@ -100,6 +100,17 @@ section.has-light-background {
 	.small-text {
 		font-size: .6em;
 	}
+
+	.code-wrapper {
+		box-shadow: none;
+		font-size: .55em;
+		width: 95%;
+	}
+
+	.code-wrapper code {
+		background-color: transparent;
+		max-height: 90%;
+	}
 }
 
 .visually-hidden:not(:focus):not(:active) {
