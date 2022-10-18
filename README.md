@@ -13,10 +13,8 @@ Let me show you a few ways React and React Testing Library told me off!
 
 ## Viewing
 
-The slides can be viewed on:
-
-
-To view slide notes, open the slide and press the `s` key.
+- Recording
+- [Slides](https://praesongprasit.github.io/talk_react-told-me-off/) - To view slide notes, open the slide and press the `s` key.
 
 ## License
 
