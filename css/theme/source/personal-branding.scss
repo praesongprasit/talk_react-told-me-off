@@ -64,6 +64,11 @@ section.has-light-background {
 		font-weight: 600;
 	}
 
+	blockquote {
+		color: $headingColor;
+		padding: .5em 1em;
+	}
+
 	.stretch img {
 		max-height: 80%;
 	}

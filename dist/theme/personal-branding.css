@@ -365,6 +365,10 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal strong {
   font-weight: 600;
 }
+.reveal blockquote {
+  color: #FFF;
+  padding: 0.5em 1em;
+}
 .reveal .stretch img {
   max-height: 80%;
 }
