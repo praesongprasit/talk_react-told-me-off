@@ -94,17 +94,36 @@ Let me show you a few ways React and React Testing Library told me off!" />
 
 				<section>
 					<h2>Why test code?</h2>
-
 					<p>
 						Reduce errors on complex interactive sites
 					</p>
 
 					<aside class="notes">
-						<p>UX spend all the time empathising with customers, yet not to their own devs</p>
-						<p>Last job, I worked in a service design agency. Seen difference when devs were and were not involved early</p>
-						<p>As a dev, I've grown. Changed the way I approach a problem</p>
-						<p>Once we've experienced this, if done right, the benefit is undeniable</p>
-						<p>Lately feels far away from my users. Given task, and no real user context</p>
+						<p>This all changed, when I joined a team who works on a highly interactive web app, which was coded using React JavaScript framework.</p>
+						<p>It was also when my job title changed from a developer to an engineer.</p>
+						<p>Wow that was imposter syndrome inducing. I'm now expected to be able to 'engineer' websites, rather than simply 'develop' them.</p>
+						<p>Suddenly, I'm not just making content available on a static page for my users.</p>
+						<p>I'm providing users with different kinds of interactive elements, which let users do a lot more complex things on the page.</p>
+					</aside>
+				</section>
+
+				<section>
+					<img class="stretch"
+							src="img/todo_graphic.png"
+							alt="Simplified UI of 4 to-do list states, empty, with an item added, done, and archived">
+
+					<aside class="notes">
+						<p>Think of to-do apps. It looks simple, a list title with lists of items.</p>
+						<p>But there's a lot more to it than you think. I have to allow users to add whatever text they want as a dismissable list item.</p>
+						<p>There's logic to control when a list item should be displayed, when it should appear in the 'done' or an 'archived' state, and when it should be permanently deleted. </p>
+						<p>With so much microinteraction and power in the hands of my users, a lot more code could go wrong here. </p>
+						<p>If I didn't code the list logic properly, selecting 'archive' a list item could permanently delete it by accident.</p>
+						<p>And what happens, if someone uses a special character?</p>
+						<p>Many JavaScript frameworks like React are designed, so that this sort of complex logic can be done in the browser, without forcing the users to refresh their browser. </p>
+						<p>In the early days of the web, most logic that deals with content happens in the server, not the browser. </p>
+						<p>So back-end developers who often use traditional imperative programming languages are expected to write tests, to ensure that the logic works as expected under different scenarios. It's good code quality control and development practice.</p>
+						<p>But writing logical tests for front-end web interfaces is a much newer concept, especially for me. </p>
+						<p>The first unit testing tool I've ever used was the React version of the open source library, called the 'Testing Library'.</p>
 					</aside>
 				</section>
 
@@ -137,10 +156,6 @@ Let me show you a few ways React and React Testing Library told me off!" />
 
 				<section>
 					<h2>When?</h2>
-					
-					<img class="stretch"
-							src="img/ux-ui-flow.png"
-							alt="UX-UI flow by Fen https://medium.com/nyc-design/ux-ui-design-process-for-beginner-753952bb2241">
 
 					<aside class="notes">
 						<p>How early should devs be involved? Depends</p>
