@@ -28,8 +28,8 @@
 		<meta property="og:image:height" content="640"/>
 
 		<meta property="og:title" name="twitter:title" content="Not accessible - React told me off!" />
-		<meta property="og:description" name="twitter:description" content="I’m an engineer who cares about HTML output. I still make mistakes.
-Often, front-end frameworks like React and Angular abstract HTML away. Even more so with design systems built on these frameworks. It’s easy to forget to scrutinise the output during implementation.
+		<meta property="og:description" name="twitter:description" content="I'm an engineer who cares about HTML output. I still make mistakes.
+Often, front-end frameworks like React and Angular abstract HTML away. Even more so with design systems built on these frameworks. It's easy to forget to scrutinise the output during implementation.
 The good news is, these frameworks are aware of the problem, and are constantly getting better at catching low-hanging fruit.
 Let me show you a few ways React and React Testing Library told me off!" />
 
@@ -37,7 +37,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 		<meta name="twitter:dnt" content="on">
 		<meta name="twitter:creator" content="@PraeSongprasit">
 
-		<title>Not accessible - React told me off! - Prae Songprasit</title>
+		<title>Not accessible - React told me off! by Prae Songprasit</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -53,24 +53,50 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					<h1>Not accessible</h1>
 					<p>React told me off!</p>
 					<p class="small-text">
-						<a href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a>
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a> and 
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Web Access Club podcast twitter">@WebAccessClub</a>
 					</p>
 
 					<aside class="notes">
-						<p>Prae, UI Front End Developer for 7 years.</p>
-						<p>Specialise in scalable CSS &amp; Semantic HTML for large scale sites.</p>
-						<p>Like Tourism New Zealand, and Xero's customer help portal.</p>
-						<p>To keep things concise, I'm going to refer to Developers 'Dev'.</p>
-						<p>UX researcher? Designer? Devs in the room?</p>
+						<p>
+							Hi, I'm Prae, a Thai female with short dark hair. I'm wearing a big pair of dark framed glasses, and  [clothes].
+						</p>
+
+						<p>
+							I'm a software engineer who cares about HTML output, and host of the Web Access Club podcast.
+						</p>
+
+						<p>
+							I started my career in web as a junior designer.
+						</p>
+
+						<p>
+							Within the first month, I realised that I didn't enjoy designing, but I sure enjoyed coding up people's designs with HTML and CSS. So I've been a front-end person ever since.
+						</p>
+
+						<p>
+							I love creating responsive designs and improving usability of designs through code. I was mainly working on large information heavy sites for many years, so using HTML, CSS and a little touch of JavaScript was enough.
+						</p>
+
+						<p>
+							That is how I've managed to avoid learning to code in modern JavaScript frameworks like React for most of my career.
+						</p>
+
+						<p>
+							Majority of my previous projects focused on templating informative pages (like tourism websites), my testing knowledge only extends to manual multi-device regression testing, and network throttling in the browser to check site performance.
+						</p>
+
+						<p>
+							Since my code is usually concerned with visuals, in a fixed budget fast-pace agency environment, I didn't know, or needed to know how to write tests for my front-end code.
+						</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Why?</h2>
+					<h2>Why test code?</h2>
 
 					<p>
-						<span class="fragment" data-fragment-index="1">Create <bold>empathy</bold></span>
-						<span class="fragment" data-fragment-index="2">and add <bold>context</bold></span>
+						Reduce errors on complex interactive sites
 					</p>
 
 					<aside class="notes">
@@ -167,24 +193,68 @@ Let me show you a few ways React and React Testing Library told me off!" />
 				</section>
 
 				<section>
-					<h2>What next?</h2>
+					<h2>People can <br>ignore tests?!</h2>
 					<p class="fragment" data-fragment-index="1">
-						UXer, go talk to your devs <br>
-						Devs, ask to be involved
+						Yes... but you can make it harder
 					</p>
 					<aside class="notes">
-						<p>Homework!</p>
-						<p>UXer, find a dev. Dev, find UXer. Now talk about how you'd like to work with eachother</p>
-						<p>We've turned UI into UX Designers through involvement in research. Lets Devs into UX Devs too</p>
+						<p>But wait… Can't people just ignore or by-pass these tests?</p>
+						<p>Yes, and no. Depends.</p>
+						<p>For React Testing Library, if you don't write any tests as a part of your usual development process, then of course you won't reap these benefits.</p>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Learn with me</h2>
+					<h2>Bake it in</h2>
 					<p>
-						<a href="https://twitter.com/PraeSongprasit" alt="Prae Songprasit's twitter">@PraeSongprasit</a> & 
-						<a href="https://twitter.com/PraeSongprasit" alt="Web Access Club podcast twitter">@WebAccessClub</a>
+						TDD, prevent commits &amp; deploys
 					</p>
+					<aside class="notes">
+						<p>But if your team does test driven development, where you write tests first, then write real code which would fix the test, then this will slot right into your workflow </p>
+						<p>As for development assistance like linting… You <em>can</em> turn some linting tools off, like additional libraries or extensions attached to your code editor. And frustratingly, many engineers unfamiliar with front-end landscape do. So engineers could simply ignore many linting warnings.</p>
+						<p>You can put in the last resort, of making sure that people cannot deploy code without passing accessibility related tests.</p>
+						<p>You can chain accessibility linter to the same test command you use before committing, pushing, and or continuous deployment can happen.</p>
+						<p>If the tests fail, then the engineers won't be able to push code or run a successful build and deploy that code to production.</p>
+						<p>Let the bots tell people off… rather than your team mates.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>React told me off</h2>
+					<p>
+						...but not all the time
+					</p>
+
+					<aside class="notes">
+						<p>As you can see, React, React Testing Library, and other accessibility linting tools are trying to improve accessibility in several ways:</p>
+						<ol>
+							<li><p>It tries to change the way you approach writing tests. To think more along the lines of what users do on the page, and querying accessible names or roles to check if something works as expected</p></li>
+							<li><p>It tries to embed basic accessibility as a part of the development process or deployment pipeline</p></li>
+							<li><p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p></li>
+						</ol>
+						<p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p>
+						<p>It will tell me off, if my element doesn't have an accessible name. But robots don't understand what the 'correct' accessible name looks like. </p>
+						<p>If I wasn't an HTML conscious engineer, I may have fixed the issue by putting a random text in as an element's accessible name and calling it the day. I can't properly address low-hanging issues raised by tooling, without understanding why that was considered an issue.</p>
+						<p>Copy is a core part of good UX design. And as of now, AI hasn't gotten smart enough to be the judge of what a good copy looks like yet. </p>
+						<p>So yes, React could tell me off for writing some inaccessible code. </p>
+						<p>But we still have to rely on human coders, testers, and designers to figure out what makes sense for our UI.</p>
+					</aside>
+				</section>
+
+				<section>
+					<blockquote>
+						Accessibility is a mindset,<br>not a standalone activity
+					</blockquote>
+					<p class="small-text">
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Link to Prae Songprasit's twitter">@PraeSongprasit</a> and 
+						<a rel="external" href="https://twitter.com/PraeSongprasit" alt="Web Access Club podcast twitter">@WebAccessClub</a>
+					</p>
+
+					<aside class="notes">
+						<p>It's important to remember that accessibility isn't a standalone thing that you can test in isolation. </p>
+						<p>It's a mindset of creating a usable experience for everyone.</p>
+						<p>It still needs humans to work together to create something truly inclusive.</p>
+					</aside>
 				</section>
 			</main>
 		</div>
