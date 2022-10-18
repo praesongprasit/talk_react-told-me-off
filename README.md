@@ -1,7 +1,15 @@
-# Talk title
+# Not accessible - React told me off!
 
-This [x]mins talk was prepared for:
-- [Event](https://) - 19th June 2019
+This 20mins talk was prepared for:
+- [A11y Camp](https://a11ycamp.org.au/) - 10th November 2022
+
+I’m an engineer who cares about HTML output. I still make mistakes.
+
+Often, front-end frameworks like React and Angular abstract HTML away. Even more so with design systems built on these frameworks. It’s easy to forget to scrutinise the output during implementation.
+
+The good news is, these frameworks are aware of the problem, and are constantly getting better at catching low-hanging fruit.
+
+Let me show you a few ways React and React Testing Library told me off!
 
 ## Viewing
 
