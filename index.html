@@ -384,8 +384,20 @@ Let me show you a few ways React and React Testing Library told me off!" />
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+				// Display presentation control arrows
+				controls: false,
+				slideNumber: true,
+				showSlideNumber: print,
+				// 16:9 aspect ratio is good for recording and Youtube uploads
+				// 1440p 2560x1440
+				// 1080p 1920x1080
+				// 720p 1280x720
+				// width: 1280,
+				// height: 720,
 				hash: true,
 				transition: 'none',
+				// Enable for PDF export
+				// showNotes: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
