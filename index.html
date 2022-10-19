@@ -72,7 +72,6 @@ Let me show you a few ways React and React Testing Library told me off!" />
 							alt="Wireframe of a website, with icon and navigation at the top, hero image, then text content">
 
 					<aside class="notes">
-						<p>Think of to-do apps. It looks simple, a list title with lists of items.</p>
 						<p>Within the first month, I realised that I didn't enjoy designing, but I sure enjoyed coding up people's designs with HTML and CSS. So I've been a front-end person ever since.</p>
 						<p>I love creating responsive designs and improving usability of designs through code. I was mainly working on large information heavy sites for many years, so using HTML, CSS and a little touch of JavaScript was enough.</p>
 						<p>That is how I've managed to avoid learning to code in modern JavaScript frameworks like React for most of my career.</p>
@@ -134,31 +133,33 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<code data-trim data-noescape>
 							&lt;Button
 								label="Add a new fish"
-								onClick="showInput(fishClass)"
+								onClick="this.showFishInput"
 							/&gt;
 							
 							&lt;Input
 								aria-label="Fish name"
-								class="fishClass"
+								class="fishInput"
 							/&gt;
 							<span class="fragment">
-							showInput(fishClass)
+							fireEvent.showFishInput()
 
-							expect(&lt;Input class="fishClass"/&gt;) 🤯
+							expect(&lt;Input class="fishInput"/&gt;) to render 🤯
 							</span>
 						</code>
 					</pre>
 
 					<aside class="notes">
 						<p>For example, I was tasked to write tests for a button that would show an input field.</p>
-						<p>[Read code from slide]</p>
-						<p>A note that in this example, Input field doesn't have a visible label... and used aria-label.... I've only done that to shorten the slide.</p>
-						<p>Please add a visible label and link it to input using for and ID instead!!</p>
+						<p>On the screen, you can see React Button markup, with label 'add a new fish' and an onClick handler, <br>which will run showFishInput that renders </p>
+						<p>Below the button, is input code it suppose to render.</p>
+						<p>The input field was marked up with aria-label 'Fish name', and class called 'fishInput'.</p>
+						<p>A note that in this example, the function's syntax isn't entirely accurate, <br>and Input field doesn't have a visible label... and used aria-label.... I've only done that to simplified the slide.</p>
+						<p>Please get correct syntax from docs, <br>and add a visible label then link it to input using for and ID attribute instead!!</p>
 						<hr>
 						<p>Anyway...</p>
 						<p>In the past, the back-end style of writing tests, would focus on testing the function and implementation itself. In this case, the test would:</p>
-						<p>[Next, Read code from slide]</p>
-						<p>The problem I have with this, is that it only tests if the input field with a class name "fishClass" appears on the page when that code is executed. The test doesn't care if there's an accessible name called "Fish name" attached to that newly rendered input field.</p>
+						<p>Fire event called showFishInput, and expect an input with class called 'fishInput' to render</p>
+						<p>The problem I have with this, is that it only tests if the input field with a class name "fishInput" appears on the page when that code is executed. The test doesn't care if there's an accessible name called "Fish name" attached to that newly rendered input field.</p>
 						<p>That's not how users think about this interface.</p>
 						<p>Users don't care about a classname? CSS classes are not visible to users on the page; their screen reader won't read it, and voice dictation tools can't find an element using CSS class.</p>
 						<p>This, is how you'd write it in React Testing Library</p>
@@ -170,12 +171,12 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<code data-trim data-noescape>
 							&lt;Button
 								label="Add a new fish"
-								onClick="showInput(fishClass)"
+								onClick="this.showFishInput"
 							/&gt;
 							
 							&lt;Input
 								aria-label="Fish name"
-								class="fishClass"
+								class="fishInput"
 							/&gt;
 							
 							userEvent.click(screen.getByText('Add a new fish'));
@@ -187,20 +188,42 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					</pre>
 
 					<aside class="notes">
-						<p>"Add a new fish" was clicked, and an input field with an accessible name called "Fish name" appeared.</p>
+						<p>userEvent "Add a new fish" was clicked.</p>
+						<p>The test expect an input field with an accessible name called "Fish name" to appear.</p>
 						<p>React Testing Library is accessibility-first like that.</p>
 						<p>It encourages engineers to write tests that queries accessible names and DOM roles, rather than arbitrary IDs and Classes that users don't care about.</p>
 						<p>In this example, I used getByRole to find the input field.</p>
-					</aside>
-				</section>
-
-				<section>
-					
-					<aside class="notes">
 						<p>But you can query or find things in the DOM by other useful static things like ByTitle, ByAltText, ByDisplayValue, even interactive states like pressed, checked, selected.</p>
 						<p>This is fantastic, because if the test cannot access those values, then something is seriously inaccessible about your code.</p>
 						<p>I once spotted an issue, where a hidden attribute accidentally remained attached to a component that should be displaying.</p>
 						<p>The query told me there's a problem because it couldn't find this hidden text.</p>
+					</aside>
+				</section>
+
+				<section>
+					<img
+							width="80%"
+							src="img/design_system_select_vs_dropdown.png"
+							alt="Simplified UI of 2 identical looking interactive elements, which could be a select box or a dropdown. One element's accessible name is Fish habitat, fresh water. Another element's name is Fish habitat.">
+					
+					<aside class="notes">
+						<p>What prompted me to write this talk</p>
+
+
+						<p>Simplified UI of 2 identical looking interactive elements, <br>it could be a select box or a dropdown.</p>
+						<p>One element's accessible name is Fish habitat, fresh water.</p>
+						<p>Another element's name is Fish habitat.</p>
+					</aside>
+				</section>
+
+				<section>
+					<img
+							width="80%"
+							src="img/design_system_select_vs_dropdown_correct.png"
+							alt="Simplified UI of 2 identical looking interactive elements. The first element, which is a select input, has a visible label called Fish Habitat, showing that Fresh water option was selected. Its accessible name is Fish habitat, Fresh water. Another element is a custom dropdown menu with both visible and accessible name of Fish habitat.">
+					
+					<aside class="notes">
+						<p></p>
 					</aside>
 				</section>
 
@@ -221,32 +244,29 @@ Let me show you a few ways React and React Testing Library told me off!" />
 				</section>
 
 				<section>
-					<img
-							src="img/axelinter.png"
-							alt="Illustration of a stylized lint roller rolling over a code editor, catching accessibility bugs">
-					<small>Image credit: <a href="https://www.deque.com/blog/deque-adds-linter-to-axe-devtools/" rel="external">Deque</a></small>
+					<pre>
+						<code data-trim data-noescape>
+							&lt;img src="fishyImage.png"/&gt;
+							(image-alt):
+
+							Ensures &lt;img&gt; elements have alternate text
+							or a role of none or presentation
+							<span class="fragment">
+							&lt;a href="https://fish.com"/
+								tabIndex="2"&gt;&lt;/a&gt;
+
+							(tabindex):
+							Ensures tabindex attribute values
+							are not greater than 0
+							</span>
+						</code>
+					</pre>
 
 					<aside class="notes">
 						<p>Second thing React tries to do, is to recommend basic development assistance</p>
 						<p>Everyone makes mistakes. Whenever possible, let tools instead of people tell them off.</p>
 						<p>There are some basic accessibility linting tools like axe-linter or eslint-plugin-jsx-a11y.</p>
 						<p>It would highlight an HTML attribute that isn't right, or is missing for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
-					</aside>
-				</section>
-
-				<section>
-					<pre>
-						<code data-trim data-noescape>
-							&lt;img src="fishyImage.png"/&gt;
-							<span class="fragment">
-							(image-alt):
-							Ensures &lt;img&gt; elements have alternate text
-							or a role of none or presentation
-							</span>
-						</code>
-					</pre>
-
-					<aside class="notes">
 						<p>An example, would be</p>
 						<p>[Read code from slide]</p>
 						<p>The linting message said:</p>
@@ -311,11 +331,27 @@ Let me show you a few ways React and React Testing Library told me off!" />
 							<li><p>It tries to embed basic accessibility as a part of the development process or deployment pipeline</p></li>
 							<li><p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p></li>
 						</ol>
-						<p>It will tell me off, if my element doesn't have an accessible name. But robots don't understand what the 'correct' accessible name looks like. </p>
+						<p>It will tell me off, if my element doesn't have an accessible name. But robots don't understand what the 'most usable' accessible name looks like. </p>
 						<p>If I wasn't an UX conscious engineer, I may have fixed the issue by putting a random text in as an element's accessible name and calling it the day.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Bots don't know UX</h2>
+					<p>
+						Good HTML &amp; copy...<br>We need humans for that
+					</p>
+
+					<aside class="notes">
 						<p>People can't properly address low-hanging issues raised by tooling, without understanding why that was considered an issue.</p>
-						<p>Copy is a core part of good UX design. And as of now, AI hasn't gotten smart enough to be the judge of what a good copy looks like yet. </p>
-						<p>So yes, React could tell me off for writing some inaccessible code. </p>
+						<p>They need to understand HTML, yes, but also how copy design fits into the whole experience.</p>
+						<p>Copy is a core part of good UX. It's crucial for assistive technologies.</p>
+						<p>And as of now, bots hasn't gotten smart enough, to be the judge of what a good copy looks like yet.</p>
+						<p>It can't tell if your tab order is all messed up either.</p>
+						<hr>
+						<p>Another problem, is that new team members who weren't involved in the automated tests and linting tool setup, <br>may incorrectly assume that's it. You're accessible if all tests passed.</p>
+						<p>Team needs to create an embeded culture of making things accessible in all part of the process, from research, to design, to criteria writing, to testing to prevent that misunderstanding.</p>
+						<p>So yes, React could tell me off for writing some inaccessible code.</p>
 						<p>But we still have to rely on human coders, testers, and designers to figure out what makes sense for our UI.</p>
 					</aside>
 				</section>
@@ -330,7 +366,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					</p>
 
 					<aside class="notes">
-						<p>It's important to remember that accessibility isn't a standalone thing that you can test in isolation. </p>
+						<p>It's important to remember that accessibility isn't a standalone thing that you can test in isolation.</p>
 						<p>It's a mindset of creating a usable experience for everyone.</p>
 						<p>It still needs humans to work together to create something truly inclusive.</p>
 					</aside>
