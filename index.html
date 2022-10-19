@@ -59,8 +59,20 @@ Let me show you a few ways React and React Testing Library told me off!" />
 
 					<aside class="notes">
 						<p>Hi, I'm Prae, a Thai female with short dark hair. I'm wearing a big pair of dark framed glasses, and  [clothes].</p>
+						<p>And I'm here to explain how React told me off, for writting inaccessible code.</p>
 						<p>I'm a software engineer who cares about HTML output, and host of the Web Access Club podcast.</p>
 						<p>I started my career in web as a junior designer.</p>
+					</aside>
+				</section>
+
+				<section>
+					<img
+							width="80%"
+							src="img/static_site_graphic.png"
+							alt="Wireframe of a website, with icon and navigation at the top, hero image, then text content">
+
+					<aside class="notes">
+						<p>Think of to-do apps. It looks simple, a list title with lists of items.</p>
 						<p>Within the first month, I realised that I didn't enjoy designing, but I sure enjoyed coding up people's designs with HTML and CSS. So I've been a front-end person ever since.</p>
 						<p>I love creating responsive designs and improving usability of designs through code. I was mainly working on large information heavy sites for many years, so using HTML, CSS and a little touch of JavaScript was enough.</p>
 						<p>That is how I've managed to avoid learning to code in modern JavaScript frameworks like React for most of my career.</p>
@@ -81,6 +93,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>Wow that was imposter syndrome inducing. I'm now expected to be able to 'engineer' websites, rather than simply 'develop' them.</p>
 						<p>Suddenly, I'm not just making content available on a static page for my users.</p>
 						<p>I'm providing users with different kinds of interactive elements, which let users do a lot more complex things on the page.</p>
+						<p>So I have to learn to write tests to prevent and spot errors before customers sees it.</p>
 					</aside>
 				</section>
 
@@ -95,7 +108,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>But there's a lot more to it than you think. I have to allow users to add whatever text they want as a dismissable list item.</p>
 						<p>There's logic to control when a list item should be displayed, when it should appear in the 'done' or an 'archived' state, and when it should be permanently deleted. </p>
 						<p>With so much microinteraction and power in the hands of my users, a lot more code could go wrong here. </p>
-						<p>If I didn't code the list logic properly, selecting 'archive' a list item could permanently delete it by accident.</p>
+						<p>If I didn't code the list logic properly, archiving a list item could permanently delete that item by accident.</p>
 						<p>And what happens, if someone uses a special character?</p>
 						<p>Many JavaScript frameworks like React are designed, so that this sort of complex logic can be done in the browser, without forcing the users to refresh their browser. </p>
 						<p>In the early days of the web, most logic that deals with content happens in the server, not the browser. </p>
@@ -148,6 +161,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>The problem I have with this, is that it only tests if the input field with a class name "fishClass" appears on the page when that code is executed. The test doesn't care if there's an accessible name called "Fish name" attached to that newly rendered input field.</p>
 						<p>That's not how users think about this interface.</p>
 						<p>Users don't care about a classname? CSS classes are not visible to users on the page; their screen reader won't read it, and voice dictation tools can't find an element using CSS class.</p>
+						<p>This, is how you'd write it in React Testing Library</p>
 					</aside>
 				</section>
 
@@ -173,12 +187,20 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					</pre>
 
 					<aside class="notes">
-						<p>To the user, a button called "Add a new fish" was clicked, and an input field with an accessible name called "Fish name" appeared.</p>
+						<p>"Add a new fish" was clicked, and an input field with an accessible name called "Fish name" appeared.</p>
 						<p>React Testing Library is accessibility-first like that.</p>
 						<p>It encourages engineers to write tests that queries accessible names and DOM roles, rather than arbitrary IDs and Classes that users don't care about.</p>
-						<p>You can query by other useful static things like ByTitle, ByAltText, ByDisplayValue, even interactive states like pressed, checked, selected.</p>
+						<p>In this example, I used getByRole to find the input field.</p>
+					</aside>
+				</section>
+
+				<section>
+					
+					<aside class="notes">
+						<p>But you can query or find things in the DOM by other useful static things like ByTitle, ByAltText, ByDisplayValue, even interactive states like pressed, checked, selected.</p>
 						<p>This is fantastic, because if the test cannot access those values, then something is seriously inaccessible about your code.</p>
-						<p>I once spotted an issue, where a hidden attribute accidentally remained attached to a component that should be displaying, because the query said it couldn't find this hidden text.</p>
+						<p>I once spotted an issue, where a hidden attribute accidentally remained attached to a component that should be displaying.</p>
+						<p>The query told me there's a problem because it couldn't find this hidden text.</p>
 					</aside>
 				</section>
 
@@ -195,27 +217,31 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>They also understand that beginners copy and paste code quite blindly when learning. So their copy-paste examples all throughout their docs are getting better and more accessibility conscious all the time.</p>
 						<p>That is of course, human intervention. Requires reading. What about machine intervention?</p>
 						<hr>
-						<p>Second, it provide basic development assistance</p>
+					</aside>
+				</section>
+
+				<section>
+					<img
+							src="img/axelinter.png"
+							alt="Illustration of a stylized lint roller rolling over a code editor, catching accessibility bugs">
+					<small>Image credit: <a href="https://www.deque.com/blog/deque-adds-linter-to-axe-devtools/" rel="external">Deque</a></small>
+
+					<aside class="notes">
+						<p>Second thing React tries to do, is to recommend basic development assistance</p>
 						<p>Everyone makes mistakes. Whenever possible, let tools instead of people tell them off.</p>
-						<p>There are some basic accessibility linting that came with React.</p>
-						<p>It would highlight an HTML attribute that isn't right for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
+						<p>There are some basic accessibility linting tools like axe-linter or eslint-plugin-jsx-a11y.</p>
+						<p>It would highlight an HTML attribute that isn't right, or is missing for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
 					</aside>
 				</section>
 
 				<section>
 					<pre>
 						<code data-trim data-noescape>
-							&lt;input tabindex="0"/&gt;
+							&lt;img src="fishyImage.png"/&gt;
 							<span class="fragment">
-							Type '{ tabindex: string; "aria-label": string; }' 
-							is not assignable to type 
-							'DetailedHTMLProps&lt;InputHTMLAttributes
-							&lt;HTMLInputElement&gt;, HTMLInputElement&gt;'.
-								
-							Property 'tabindex' does not exist on type
-							'DetailedHTMLProps&lt;InputHTMLAttributes
-							&lt;HTMLInputElement&gt;, HTMLInputElement&gt;'.
-							Did you mean 'tabIndex'?
+							(image-alt):
+							Ensures &lt;img&gt; elements have alternate text
+							or a role of none or presentation
 							</span>
 						</code>
 					</pre>
@@ -225,8 +251,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>[Read code from slide]</p>
 						<p>The linting message said:</p>
 						<p>[Next, Read code from slide]</p>
-						<p>It's basically saying that I shouldn't be allowed to put tabindex on an input.</p>
-						<p>React also highly recommended other complimentary development plugins like eslint-plugin-jsx-a11y, which provides more accessibility linting feedback as you code in your favourite code editor. </p>
+						<p>This is a great way to remind engineers about putting in an alt text.</p>
 						<p>The last thing React did, was to recommend good practices in Create React App starter guide</p>
 					</aside>
 				</section>
@@ -240,9 +265,8 @@ Let me show you a few ways React and React Testing Library told me off!" />
 
 					<aside class="notes">
 						<p>Create React App's is a bootstrap kit for starting a new React project.</p>
-						<p>React understand that it's crucial to add best practices to starter kits, because that's usually how someone starts learning how to build with React.</p>
-						<p>Who reads documentation?!</p>
-						<p>React Testing Library and the linting tools mentioned in main React docs is also mentioned in Create React App guides, along with other accessibility best practices</p>
+						<p>React understand that it's crucial to add best practices to starter kits, because that's usually how someone create their first React project.</p>
+						<p>React Testing Library and the linting tools mentioned before, were also recommended in Create React App guides, along with other accessibility best practices</p>
 					</aside>
 				</section>
 
@@ -253,6 +277,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					</p>
 					<aside class="notes">
 						<p>But wait… this is real life. Can't people also just ignore or by-pass these tests?</p>
+						<p>[Next]</p>
 						<p>Yes, and no. Depends.</p>
 						<p>For React Testing Library, if you don't write any tests as a part of your usual development process, then of course you won't reap these benefits.</p>
 					</aside>
@@ -264,10 +289,10 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						TDD, prevent commits &amp; stop deploys
 					</p>
 					<aside class="notes">
-						<p>But if your team does test driven development, where you write tests first, then write real code which would fix the test, then this will slot right into your workflow </p>
+						<p>But if your team does test driven development, where you write tests first, then write real code which would fix the test, then React Testing Library will slot right into your workflow </p>
 						<p>As for development assistance like linting… You <em>can</em> turn some linting tools off, like additional libraries or extensions attached to your code editor. And frustratingly, many engineers unfamiliar with front-end landscape do. So engineers could simply ignore many linting warnings.</p>
-						<p>You can put in the last resort, of making sure that people cannot deploy code without passing accessibility related tests.</p>
-						<p>You can chain accessibility linter to the same test command you use before committing, pushing, and or continuous deployment can happen.</p>
+						<p>You can put in the last resort, of making sure that people cannot deploy code without passing accessibility tests and or linters.</p>
+						<p>You can chain accessibility linter to the same test command you use before committing, pushing locally, and during build to deploy.</p>
 						<p>If the tests fail, then the engineers won't be able to push code or run a successful build and deploy that code to production.</p>
 						<p>Let the bots tell people off… rather than your team mates.</p>
 					</aside>
@@ -286,9 +311,9 @@ Let me show you a few ways React and React Testing Library told me off!" />
 							<li><p>It tries to embed basic accessibility as a part of the development process or deployment pipeline</p></li>
 							<li><p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p></li>
 						</ol>
-						<p>It tries to nudge you to add important things like alt tags to images, and accessible names in links and buttons.</p>
 						<p>It will tell me off, if my element doesn't have an accessible name. But robots don't understand what the 'correct' accessible name looks like. </p>
-						<p>If I wasn't an HTML conscious engineer, I may have fixed the issue by putting a random text in as an element's accessible name and calling it the day. I can't properly address low-hanging issues raised by tooling, without understanding why that was considered an issue.</p>
+						<p>If I wasn't an UX conscious engineer, I may have fixed the issue by putting a random text in as an element's accessible name and calling it the day.</p>
+						<p>People can't properly address low-hanging issues raised by tooling, without understanding why that was considered an issue.</p>
 						<p>Copy is a core part of good UX design. And as of now, AI hasn't gotten smart enough to be the judge of what a good copy looks like yet. </p>
 						<p>So yes, React could tell me off for writing some inaccessible code. </p>
 						<p>But we still have to rely on human coders, testers, and designers to figure out what makes sense for our UI.</p>
