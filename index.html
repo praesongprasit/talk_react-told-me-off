@@ -98,7 +98,7 @@ Let me show you a few ways React and React Testing Library told me off!" />
 
 				<section>
 					<img
-							width="80%"
+							width="70%"
 							src="img/todo_graphic.png"
 							alt="Simplified UI of 4 to-do list states, empty, with an item added, done, and archived">
 
@@ -235,10 +235,13 @@ Let me show you a few ways React and React Testing Library told me off!" />
 						<p>I talked quite a bit about the React version of Testing Library.</p>
 						<p>But as the name suggests, it's a library. Something designed to be used in conjunction with a framework. It's not React itself.</p>
 						<p>So what does React itself actually do to help nudge engineers to write more accessible code?</p>
+						<p>It ries to improve its docs, and recommend more development assistance, &amp; bundle those recommendations in their starter kit.</p>
 						<hr>
-						<p>First, it tries to improve documentation.</p>
-						<p>They also understand that beginners copy and paste code quite blindly when learning. So their copy-paste examples all throughout their docs are getting better and more accessibility conscious all the time.</p>
+						<p>With documentation,</p>
+						<p>React understand that beginners copy and paste code quite blindly when learning.</p>
+						<p>So their copy-paste examples all throughout their docs are getting better, and more accessibility conscious all the time.</p>
 						<p>That is of course, human intervention. Requires reading. What about machine intervention?</p>
+						<p>Well, is to recommend basic development assistance</p>
 						<hr>
 					</aside>
 				</section>
@@ -247,31 +250,31 @@ Let me show you a few ways React and React Testing Library told me off!" />
 					<pre>
 						<code data-trim data-noescape>
 							&lt;img src="fishyImage.png"/&gt;
-							(image-alt):
 
+							(image-alt):
 							Ensures &lt;img&gt; elements have alternate text
 							or a role of none or presentation
-							<span class="fragment">
-							&lt;a href="https://fish.com"/
-								tabIndex="2"&gt;&lt;/a&gt;
+
+
+							&lt;button tabindex="2"&gt;
+								Add a new fish
+							&lt;/button&gt;
 
 							(tabindex):
 							Ensures tabindex attribute values
 							are not greater than 0
-							</span>
 						</code>
 					</pre>
 
 					<aside class="notes">
-						<p>Second thing React tries to do, is to recommend basic development assistance</p>
 						<p>Everyone makes mistakes. Whenever possible, let tools instead of people tell them off.</p>
 						<p>There are some basic accessibility linting tools like axe-linter or eslint-plugin-jsx-a11y.</p>
 						<p>It would highlight an HTML attribute that isn't right, or is missing for a specific type of element with a red squiggly line like when you made a typo, and would show warnings in the console.</p>
-						<p>An example, would be</p>
-						<p>[Read code from slide]</p>
+						<p>The example on the screen, shows linting messages for image and a button called Add a new fish with tabindex 2.</p>
 						<p>The linting message said:</p>
-						<p>[Next, Read code from slide]</p>
-						<p>This is a great way to remind engineers about putting in an alt text.</p>
+						<p>that the image needed an alternative text or a role of non or presentation</p>
+						<p>For the button, it said that tabindex value should be no greater than 0.</p>
+						<p>This is a great way to remind engineers basic things while they're coding.</p>
 						<p>The last thing React did, was to recommend good practices in Create React App starter guide</p>
 					</aside>
 				</section>
