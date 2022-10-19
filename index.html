@@ -205,12 +205,14 @@ Let me show you a few ways React and React Testing Library told me off!" />
 							alt="Simplified UI of 2 identical looking interactive elements, which could be a select box or a dropdown. One element's accessible name is Fish habitat, fresh water. Another element's name is Fish habitat.">
 					
 					<aside class="notes">
-						<p>What prompted me to write this talk</p>
-
-
-						<p>Simplified UI of 2 identical looking interactive elements, <br>it could be a select box or a dropdown.</p>
-						<p>One element's accessible name is Fish habitat, fresh water.</p>
-						<p>Another element's name is Fish habitat.</p>
+						<p>What prompted me to write this talk, was when React Testing Library once helped me spotted that we used the wrong component from our design system.</p>
+						<p>On the screen, I've put up UI of 2 identical looking interactive elements, <br>it could be a select box or a dropdown.</p>
+						<p>My team needed a dropdown UI, so we quickly picked up one that seems easiest to implement.</p>
+						<p>In this example, the dropdown UI had a visible label called fish habitat, that shouldn't change.</p>
+						<p>We wrote the test to select an option to display information related to that habitat. In this case, 'fresh water'</p>
+						<p>We found out that the dropdown's accesible name after we selected 'fresh water', was 'fish habitat, fresh water'</p>
+						<p>We were very confused. Why is did the accessible name changed when something was selected?</p>
+						<p>We tested with a screen reader, and it announced the same thing!</p>
 					</aside>
 				</section>
 
@@ -221,7 +223,18 @@ Let me show you a few ways React and React Testing Library told me off!" />
 							alt="Simplified UI of 2 identical looking interactive elements. The first element, which is a select input, has a visible label called Fish Habitat, showing that Fresh water option was selected. Its accessible name is Fish habitat, Fresh water. Another element is a custom dropdown menu with both visible and accessible name of Fish habitat.">
 					
 					<aside class="notes">
-						<p></p>
+						<p>Turns out, the problem was that we used a select component, instead of a dropdown menu.</p>
+						<p>Select is a type of input field. It was originally designed for form submissions.</p>
+						<p>Usually, a select input field would have a visible label.</p>
+						<p>Once an option was selected, the screen reader would read both label and value. Just like any other input fields that was properly related to a label.</p>
+						<hr>
+						<p>My team saw that the design system component came with an option to hide visible label. The design didn't have one above the trigger, so we enabled that</p>
+						<p>Our design sytem team realised that a select input will only annouce the value of 'fresh water' without any context to screen reader users.</p>
+						<p>So they tried to be helpful and sets aria-label for the select input as label, and value. Hence the Fresh habitat and fresh water annoucement</p>
+						<hr>
+						<p>We should have used the dropdown menu component,<br>that was designed to be just a menu of repeatable activities people could do on a page, hence no need to annouce what's selected</p>
+						<p>The dropdown accessible name never change.</p>
+						<p>Thanks to React Testing Library, it nudge us to reimplement the feature with the right component.</p>
 					</aside>
 				</section>
 
